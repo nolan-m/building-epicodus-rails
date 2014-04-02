@@ -10,22 +10,27 @@ class LessonsController < ApplicationController
   end
 
   def create
+    params[:lesson][:slug] = params[:lesson][:name].parameterize
     @lesson = Lesson.new(params[:lesson])
-    render('lessons/index.html.erb')
+    if @lesson.save
+      redirect_to(:back)
+    else
+      render('lessons/index.html.erb')
+    end
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
-    render('lessons/show.html.erb')
+    @lesson = Lesson.find_by(:slug => params[:slug])
+    render('show.html.erb')
   end
 
   def edit
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find(params[:slug])
     render('lessons/show.html.erb')
   end
 
   def update
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find(params[:slug])
     if @lesson.update(params[:lesson])
       render('lessons/index.html.erb')
     else
@@ -34,7 +39,7 @@ class LessonsController < ApplicationController
   end
 
   def destroy
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find(params[:slug])
     @lesson.destroy
     render('lessons/index.html.erb')
   end

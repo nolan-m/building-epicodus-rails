@@ -1,0 +1,21 @@
+<h2>Sections</h2>
+
+<ul>
+  <% @sections.each do |section| %>
+  <li><a href="/sections/<%= section.slug %>"> <%= section.name %></a></li>
+  <% end %>
+</ul>
+
+
+<h3>Add a Section</h3>
+
+<form action="/sections/" method="post">
+  <br><label for="section_name">Name:</label>
+  <input id="section_name" name="section[name]" type="text">
+   <select name="section[section_id]">
+    <% Chapter.all.order(:name).each do |chapter| %>
+      <option value="<%= chapter.id %>"><%= chapter.name %></option>
+    <% end %>
+  </select>
+  <button>Add Section</button>
+</form>
