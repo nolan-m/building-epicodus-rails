@@ -1,1 +1,33 @@
 <h1> <%= @lesson.name %> </h1>
+
+<p><%= @lesson.content %></p>
+
+<p> <button class="edit"> Edit </button> | <button><a href="/lessons/<%= @lesson.slug %>"
+   data-confirm="Are You Sure?"
+   data-method="delete"
+   rel="nofollow">Delete</a></button>
+
+<div class="edit_form">
+  <h3>Edit Lesson</h3>
+  <form action="/lessons/<%= @lesson.slug %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <br><label for="lesson_name">Name:</label>
+    <input id="lesson_name" name="lesson[name]" type="text" value="<%= @lesson.name %>">
+    <br><label for="lesson_content">Content:</label>
+    <textarea rows="4" cols="50" name="lesson[content]"><%= @lesson.content %>
+    </textarea>
+    <br><label for="lesson_number">Lesson Number:</label>
+    <input id="lesson_number" name="lesson[number]" type="text" value="<%= @lesson.number %>">
+
+
+    <label for="lesson_section_id"><select id="lesson_section_id" name="lesson[section_id]">
+      <option value="<% @lesson.section_id %>"><%= Section.find(@lesson.section_id).name %></option>
+      <% Section.all.order(:name).each do |section| %>
+       <% if section.id != @lesson.section_id %>
+        <option value="<%= section.id %>"><%= section.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+    <button>Update Lesson</button>
+  </form>
+</div>

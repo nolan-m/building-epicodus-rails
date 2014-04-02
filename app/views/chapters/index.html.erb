@@ -1,0 +1,16 @@
+<h2>Chapters</h2>
+
+<ul>
+  <% @chapters.each do |chapter| %>
+  <li><a href="/chapters/<%= chapter.slug %>"> <%= chapter.name %></a></li>
+  <% end %>
+</ul>
+
+
+<h3>Add a Chapter</h3>
+
+<form action="/chapters/" method="post">
+  <br><label for="chapter_name">Name:</label>
+  <input id="chapter_name" name="chapter[name]" type="text">
+  <button>Add Chapter</button>
+</form>

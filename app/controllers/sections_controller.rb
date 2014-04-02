@@ -13,7 +13,7 @@ class SectionsController < ApplicationController
     params[:section][:slug] = params[:section][:name].parameterize
     @section = Section.new(params[:section])
     if @section.save
-      redirect_to(:back)
+      redirect_to('/sections')
     else
       render('sections/index.html.erb')
     end
@@ -25,22 +25,22 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = Section.find(params[:slug])
+    @section = Section.find_by(:slug => params[:slug])
     render('sections/show.html.erb')
   end
 
   def update
-    @section = Section.find(params[:slug])
+    @section = Section.find_by(:slug => params[:slug])
     if @section.update(params[:section])
-      render('sections/index.html.erb')
+      redirect_to('/sections/')
     else
       render('sections/show.html.erb')
     end
   end
 
   def destroy
-    @section = Section.find(params[:slug])
+    @section = Section.find_by(:slug => params[:slug])
     @section.destroy
-    render('sections/index.html.erb')
+    redirect_to('/sections')
   end
 end

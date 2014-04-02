@@ -13,11 +13,10 @@
   <br><label for="lesson_name">Name:</label>
   <input id="lesson_name" name="lesson[name]" type="text">
   <br><label for="lesson_content">Content:</label>
-  <textarea rows="4" cols="50" name="lesson[content]">
-  </textarea>
+  <textarea rows="4" cols="50" name="lesson[content]"></textarea>
   <br><label for="lesson_number">Lesson Number:</label>
   <input id="lesson_number" name="lesson[number]" type="text">
-  <select name="lesson[section_id]">
+  <label for="lesson_section_id"><select id="lesson_section_id" name="lesson[section_id]">
     <% Section.all.order(:name).each do |section| %>
       <option value="<%= section.id %>"><%= section.name %></option>
     <% end %>

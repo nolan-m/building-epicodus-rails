@@ -1,1 +1,24 @@
 <h1> <%= @section.name %> </h1>
+
+<p> <button class="edit"> Edit </button> | <button><a href="/sections/<%= @section.slug %>"
+   data-confirm="Are You Sure?"
+   data-method="delete"
+   rel="nofollow">Delete</a></button>
+
+
+<div class="edit_form">
+  <form action="/sections/<%= @section.slug %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <br><label for="section_name">Name:</label>
+  <input id="section_name" name="section[name]" type="text" value="<%= @section.name %>">
+   <label for="section_chapter_id"><select id="section_chapter_id" name="section[chapter_id]">
+     <option value="<% @section.chapter_id %>"><%= Chapter.find(@section.chapter_id).name %></option>
+     <% Chapter.all.order(:name).each do |chapter| %>
+      <% if chapter.id != @section.chapter_id %>
+       <option value="<%= chapter.id %>"><%= chapter.name %></option>
+    <% end %>
+    <% end %>
+  </select>
+  <button>Update Section</button>
+  </form>
+</div>

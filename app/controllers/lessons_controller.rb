@@ -13,7 +13,7 @@ class LessonsController < ApplicationController
     params[:lesson][:slug] = params[:lesson][:name].parameterize
     @lesson = Lesson.new(params[:lesson])
     if @lesson.save
-      redirect_to(:back)
+      redirect_to('/lessons/')
     else
       render('lessons/index.html.erb')
     end
@@ -25,22 +25,22 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    @lesson = Lesson.find(params[:slug])
+    @lesson = Lesson.find_by(:slug => params[:slug])
     render('lessons/show.html.erb')
   end
 
   def update
-    @lesson = Lesson.find(params[:slug])
+    @lesson = Lesson.find_by(:slug => params[:slug])
     if @lesson.update(params[:lesson])
-      render('lessons/index.html.erb')
+      redirect_to("/lessons/#{@lesson.slug}")
     else
       render('lessons/show.html.erb')
     end
   end
 
   def destroy
-    @lesson = Lesson.find(params[:slug])
+    @lesson = Lesson.find_by(:slug => params[:slug])
     @lesson.destroy
-    render('lessons/index.html.erb')
+    redirect_to('/lessons')
   end
 end
