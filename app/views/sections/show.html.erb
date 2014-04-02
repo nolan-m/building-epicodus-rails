@@ -1,5 +1,11 @@
 <h1> <%= @section.name %> </h1>
 
+<ul>
+  <% @section.lessons.each do |lesson| %>
+    <li><a href="/lessons/<%= lesson.slug %>"> <%= lesson.name %> </a></li>
+  <% end %>
+</ul>
+<p>Test</p>
 <p> <button class="edit"> Edit </button> | <button><a href="/sections/<%= @section.slug %>"
    data-confirm="Are You Sure?"
    data-method="delete"
@@ -22,3 +28,5 @@
   <button>Update Section</button>
   </form>
 </div>
+
+<a href="/chapters/">Chapters</a> | <a href="/sections/">Sections</a> | <a href="/lessons/">Lessons</a>

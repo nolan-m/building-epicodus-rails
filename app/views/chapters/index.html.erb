@@ -1,10 +1,25 @@
-<h2>Chapters</h2>
+<h1>Epicodus</h1>
+<h2>Learn How to Program</h2>
 
 <ul>
   <% @chapters.each do |chapter| %>
-  <li><a href="/chapters/<%= chapter.slug %>"> <%= chapter.name %></a></li>
+  <li class="Chapter"><%= chapter.name %></li>
+
+  <ul>
+  <% chapter.sections.each do |section| %>
+    <li class="Section"><a href="/sections/<%= section.slug %>"><%= section.name %></a></li>
+
+      <ul>
+        <% section.lessons.each do |lesson| %>
+          <li class="Lesson"><a href="/lessons/<%= lesson.slug %>"><%= lesson.name %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
   <% end %>
 </ul>
+
+
 
 
 <h3>Add a Chapter</h3>
@@ -14,3 +29,5 @@
   <input id="chapter_name" name="chapter[name]" type="text">
   <button>Add Chapter</button>
 </form>
+
+<a href="/chapters/">Chapters</a> | <a href="/sections/">Sections</a> | <a href="/lessons/">Lessons</a>

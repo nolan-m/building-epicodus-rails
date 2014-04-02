@@ -13,6 +13,7 @@ BuildingEpicodus::Application.routes.draw do
   match('/sections/:slug', {:via => [:patch, :put], :to => 'sections#update'})
   match('/sections/:slug', {:via => :delete, :to => 'sections#destroy'})
 
+  match('/', {:via => :get, :to => 'chapters#index'})
   match('/chapters', {:via => :get, :to => 'chapters#index'})
   match('/chapters', {:via => :get, :to => 'chapters#new'})
   match('/chapters', {:via => :post, :to => 'chapters#create'})
